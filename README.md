@@ -200,13 +200,6 @@ CORS_ORIGINS=https://your-frontend-url.example.com
 ### Database
 Use a managed PostgreSQL instance such as Neon, Supabase, or Render Postgres.
 
-## Screenshots
-Add screenshots here after you start the app locally.
-
-Example placeholder:
-- Dashboard view
-- Task add/edit form
-- Mobile responsive layout
 
 ## Future Improvements
 - Add task sorting by due date or priority
@@ -216,11 +209,3 @@ Example placeholder:
 - Add task comments or notes
 - Add automated UI tests
 
-## Interview Notes
-This project is intentionally simple and practical:
-- React handles the UI and state transitions.
-- FastAPI exposes a clean REST endpoint layer.
-- SQLAlchemy maps Python models to database tables.
-- Pydantic protects the API from invalid input.
-- Environment variables keep production configuration separate from code.
-- The structure stays small enough to explain clearly in a technical conversation.
