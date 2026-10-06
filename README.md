@@ -1,4 +1,3 @@
-````markdown
 # Mini Task Management Web App
 
 A full-stack Task Management application built with **React, FastAPI, SQLAlchemy, and PostgreSQL**.
@@ -96,7 +95,6 @@ https://task-management-web-app-wine.vercel.app/docs
                    ┌─────────────────────────┐
                    │      PostgreSQL DB      │
                    └─────────────────────────┘
-````
 
 ---
 
