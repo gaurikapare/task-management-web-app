@@ -95,7 +95,7 @@ https://task-management-web-app-wine.vercel.app/docs
                    ┌─────────────────────────┐
                    │      PostgreSQL DB      │
                    └─────────────────────────┘
-
+```
 
 
 ## 📂 Project Structure
