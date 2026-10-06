@@ -1,211 +1,455 @@
-# Mini Task Management Application
+````markdown
+# Mini Task Management Web App
 
-## Overview
-This project is a small full-stack task management application built with a React frontend, a FastAPI backend, and a PostgreSQL-compatible SQLAlchemy database layer. It is designed to be practical, readable, and easy to explain in an interview while still covering the core CRUD workflow, validation, filtering, and production-ready environment configuration.
+A full-stack Task Management application built with **React, FastAPI, SQLAlchemy, and PostgreSQL**.
 
-## Features
-- Create tasks
+The application allows users to create, view, update, delete, search, and filter tasks based on status and priority.
+
+## 🚀 Live Demo
+
+**Frontend:**  
+https://task-management-web-app-blkj.vercel.app
+
+**Backend API:**  
+https://task-management-web-app-wine.vercel.app
+
+**API Documentation (Swagger):**  
+https://task-management-web-app-wine.vercel.app/docs
+
+---
+
+## 📌 Features
+
+- Create new tasks
 - View all tasks
-- View a single task
-- Update task details
+- View individual task details
+- Update existing tasks
 - Delete tasks
-- Change task status: Pending, In Progress, Completed
-- Filter by status and priority
-- Search by title and description
-- Frontend validation and friendly error messages
-- Responsive layout for desktop and mobile
-- Clean API error handling
+- Search tasks by title/description
+- Filter tasks by status
+- Filter tasks by priority
+- Task status management
+- Task priority management
+- RESTful API architecture
+- PostgreSQL database integration
+- Interactive Swagger API documentation
+- Responsive and clean user interface
+- Production deployment using Vercel
 
-## Tech Stack
-- Frontend: React + Vite + JavaScript
-- Backend: FastAPI + Python
-- Database: PostgreSQL (with SQLAlchemy)
-- Validation: Pydantic
-- API: REST with JSON responses
+---
 
-## Architecture
-The application follows a simple three-layer structure:
+## 🛠️ Tech Stack
 
-Frontend (React) -> REST API (FastAPI) -> PostgreSQL Database
+### Frontend
+- React.js
+- Vite
+- JavaScript
+- CSS
 
-## Project Structure
+### Backend
+- Python
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- Uvicorn
+
+### Database
+- PostgreSQL
+- PostgreSQL-compatible SQLAlchemy configuration
+
+### Deployment
+- Vercel
+- GitHub
+
+### Development Tools
+- VS Code
+- Git
+- GitHub
+- Swagger / OpenAPI
+
+---
+
+## 🏗️ Project Architecture
+
 ```text
-Task1/
+                   ┌─────────────────────────┐
+                   │       User / Browser    │
+                   └────────────┬────────────┘
+                                │
+                                ▼
+                   ┌─────────────────────────┐
+                   │     React Frontend      │
+                   │       (Vite)            │
+                   └────────────┬────────────┘
+                                │
+                         REST API Requests
+                                │
+                                ▼
+                   ┌─────────────────────────┐
+                   │      FastAPI Backend    │
+                   │       (Python)          │
+                   └────────────┬────────────┘
+                                │
+                         SQLAlchemy ORM
+                                │
+                                ▼
+                   ┌─────────────────────────┐
+                   │      PostgreSQL DB      │
+                   └─────────────────────────┘
+````
+
+---
+
+## 📂 Project Structure
+
+```text
+task-management-web-app/
+│
 ├── backend/
+│   │
 │   ├── app/
+│   │   ├── routes/
+│   │   │   └── tasks.py
+│   │   │
+│   │   ├── services/
+│   │   │
 │   │   ├── __init__.py
 │   │   ├── config.py
 │   │   ├── database.py
 │   │   ├── main.py
 │   │   ├── models.py
-│   │   ├── schemas.py
-│   │   ├── routes/
-│   │   │   ├── __init__.py
-│   │   │   └── tasks.py
-│   │   └── services/
-│   │       ├── __init__.py
-│   │       └── task_service.py
-│   ├── database/
-│   │   └── __init__.py
+│   │   └── schemas.py
+│   │
 │   ├── tests/
-│   │   └── test_tasks_api.py
-│   ├── .env
+│   │
+│   ├── requirements.txt
 │   ├── .env.example
-│   └── requirements.txt
+│   └── tasks.db
+│
 ├── frontend/
+│   │
 │   ├── src/
-│   ├── .env
-│   ├── .env.example
+│   │   ├── components/
+│   │   │   ├── TaskCard.jsx
+│   │   │   └── TaskForm.jsx
+│   │   │
+│   │   ├── App.jsx
+│   │   └── ...
+│   │
 │   ├── package.json
-│   └── vite.config.*
-├── .env.example
+│   └── ...
+│
 ├── .gitignore
 ├── README.md
-└── package-lock.json
+└── ...
 ```
 
-## Database Schema
-The task table includes:
+---
 
-- id: integer primary key, auto-incremented
-- title: string, required, max length 150
-- description: text, optional
-- status: string, required, values are PENDING, IN_PROGRESS, COMPLETED
-- priority: string, required, values are LOW, MEDIUM, HIGH
-- created_at: timestamp, automatically set
-- updated_at: timestamp, automatically updated
+## 🔌 API Endpoints
 
-## API Endpoints
-Base path: `/api/tasks`
+The backend provides the following REST APIs:
 
-- `POST /api/tasks` - Create a task
-- `GET /api/tasks` - Return all tasks with optional query filters
-- `GET /api/tasks/{id}` - Return one task
-- `PUT /api/tasks/{id}` - Update a task
-- `DELETE /api/tasks/{id}` - Delete a task
+| Method | Endpoint               | Description         |
+| ------ | ---------------------- | ------------------- |
+| GET    | `/health`              | Health check        |
+| GET    | `/api/tasks`           | Get all tasks       |
+| POST   | `/api/tasks`           | Create a new task   |
+| GET    | `/api/tasks/{task_id}` | Get a specific task |
+| PUT    | `/api/tasks/{task_id}` | Update a task       |
+| DELETE | `/api/tasks/{task_id}` | Delete a task       |
 
-Optional query parameters:
-- `search=react`
-- `status=PENDING`
-- `priority=HIGH`
+---
 
-Example combinations:
-- `GET /api/tasks?search=assignment`
-- `GET /api/tasks?status=COMPLETED&priority=HIGH`
+## 📖 API Documentation
 
-## Local Setup
-### 1. Clone the project and open the folder
+The backend provides interactive Swagger documentation using FastAPI.
+
+Open:
+
+```text
+https://task-management-web-app-wine.vercel.app/docs
+```
+
+From Swagger UI, the API endpoints can be tested directly.
+
+---
+
+## 🗃️ Task Model
+
+Each task contains information such as:
+
+```text
+Task
+├── ID
+├── Title
+├── Description
+├── Status
+├── Priority
+└── Created / Updated information
+```
+
+### Status
+
+Tasks can have different statuses such as:
+
+* Pending
+* In Progress
+* Completed
+
+### Priority
+
+Tasks can have different priority levels:
+
+* Low
+* Medium
+* High
+
+---
+
+## 🔍 Search and Filtering
+
+The frontend provides:
+
+### Search
+
+Users can search tasks using keywords.
+
+### Status Filter
+
+Tasks can be filtered according to their current status.
+
+### Priority Filter
+
+Tasks can be filtered according to their priority.
+
+These features make it easier to manage a larger number of tasks.
+
+---
+
+## 💻 Local Setup
+
+### 1. Clone the repository
+
 ```bash
-cd Task1
+git clone https://github.com/gaurikapare/task-management-web-app.git
 ```
 
-### 2. Backend setup
+```bash
+cd task-management-web-app
+```
+
+---
+
+# Backend Setup
+
+### 2. Create a virtual environment
+
 ```bash
 cd backend
+```
+
+```bash
 python -m venv .venv
+```
+
+### Windows
+
+```bash
 .venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Frontend setup
+### 4. Configure environment variables
+
+Create a `.env` file inside the `backend` directory.
+
+Example:
+
+```env
+DATABASE_URL=your_postgresql_database_url
+```
+
+Do not commit your real database credentials to GitHub.
+
+### 5. Start the backend
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Backend will run at:
+
+```text
+http://127.0.0.1:8000
+```
+
+Swagger documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# Frontend Setup
+
+### 6. Open a new terminal
+
+From the project root:
+
 ```bash
 cd frontend
+```
+
+### 7. Install dependencies
+
+```bash
 npm install
 ```
 
-### 4. Database setup
-For local development, create a PostgreSQL database and assign the connection string in `.env`.
+### 8. Start the frontend
 
-Example PostgreSQL connection string:
-```env
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/task_manager
+```bash
+npm run dev
 ```
 
-For quick local testing, the project also supports a SQLite fallback when `DATABASE_URL` is not configured. The included `.env` file uses SQLite so the app can run immediately without a database server.
+The frontend will normally run at:
 
-## Environment Variables
-### Backend
-Create a `.env` file in `backend/`:
+```text
+http://localhost:5173
+```
+
+---
+
+## 🌐 Environment Configuration
+
+For production, the frontend communicates with the deployed FastAPI backend.
+
+Example:
+
 ```env
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/task_manager
-CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+VITE_API_URL=https://task-management-web-app-wine.vercel.app
+```
+
+Make sure environment variables are configured correctly for the deployment environment.
+
+---
+
+## 🚀 Deployment
+
+The application is deployed using **Vercel**.
+
+### Backend
+
+The FastAPI backend is deployed separately from the `backend` directory.
+
+Production backend:
+
+```text
+https://task-management-web-app-wine.vercel.app
 ```
 
 ### Frontend
-Create a `.env` file in `frontend/`:
-```env
-VITE_API_URL=http://localhost:8000
+
+The React frontend is deployed separately from the `frontend` directory.
+
+Production frontend:
+
+```text
+https://task-management-web-app-blkj.vercel.app
 ```
 
-## How to Run Frontend
-```bash
-cd frontend
-npm run dev -- --host 127.0.0.1 --port 5173
+Both applications are connected through REST APIs.
+
+---
+
+## 🔐 CORS Configuration
+
+The FastAPI backend is configured to allow requests from the deployed frontend.
+
+```python
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 ```
 
-Open: `http://127.0.0.1:5173/`
+This allows the React frontend to communicate with the FastAPI backend in production.
 
-## How to Run Backend
-```bash
-cd backend
-.venv\Scripts\activate
-uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+---
+
+## 🧪 Testing
+
+The API can be tested using:
+
+* Swagger UI
+* Browser
+* Frontend application
+* REST API clients such as Postman
+
+Example health check:
+
+```http
+GET /health
 ```
 
-## How to Run Database
-For PostgreSQL production use:
-```bash
-createdb task_manager
+Expected response:
+
+```json
+{
+  "status": "ok"
+}
 ```
 
-Then update the `DATABASE_URL` environment variable to match your local or hosted PostgreSQL instance.
+---
 
-## Testing
-Run backend tests:
-```bash
-cd backend
-.venv\Scripts\activate
-python -m pytest -q
-```
+## 📸 Application
 
-The test suite covers:
-- task creation
-- reading tasks
-- update flow
-- delete flow
-- search and filter behavior
-- invalid task IDs
-- empty title validation
-- invalid status validation
-- invalid priority validation
+The application provides a dashboard where users can:
 
-## Deployment
-### Frontend
-Use Vercel or a similar host.
+* View tasks
+* Search tasks
+* Filter tasks
+* Create tasks
+* Edit tasks
+* Delete tasks
+* Change status
+* Change priority
 
-Set environment variable:
-```env
-VITE_API_URL=https://your-backend-url.example.com
-```
+---
 
-### Backend
-Use Render or any compatible Python hosting service.
+## 🎯 Project Objective
 
-Set environment variable:
-```env
-DATABASE_URL=postgresql://user:password@host:5432/dbname
-CORS_ORIGINS=https://your-frontend-url.example.com
-```
+The objective of this project is to build a simple but production-ready full-stack task management system demonstrating:
 
-### Database
-Use a managed PostgreSQL instance such as Neon, Supabase, or Render Postgres.
+* REST API development
+* Backend architecture
+* Database integration
+* Frontend and backend communication
+* CRUD operations
+* API documentation
+* CORS configuration
+* Cloud deployment
+* Git/GitHub workflow
+
+---
+
+## 👩‍💻 Author
+
+**Gauri Kapare**
+
+B.Tech – Information Technology and Data Science
 
 
-## Future Improvements
-- Add task sorting by due date or priority
-- Add user authentication
-- Add pagination for large task lists
-- Add dark mode
-- Add task comments or notes
-- Add automated UI tests
-
+---
